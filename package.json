@@ -1,0 +1,22 @@
+{
+  "name": "jsplumb-demo",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@jsplumb/browser-ui": "^5.11.3",
+    "jsplumb": "^2.15.6",
+    "jsplumbtoolkit": "^2.4.2",
+    "vue": "^3.2.37"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.1.0",
+    "sass": "^1.54.9",
+    "vite": "^3.1.0"
+  }
+}
