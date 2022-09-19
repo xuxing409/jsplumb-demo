@@ -18,18 +18,21 @@
       </div>
     </div>
     <div
-      id="flowWrap"
+      id="flow-area"
       ref="flowWrapRef"
       @drop="drop($event)"
       @dragover="allowDrop($event)"
       class="flow-continer"
-    ></div>
+    >
+      <div id="item_left" class="drag-item"></div>
+      <div id="item_right" class="drag-item" style="left: 150px"></div>
+    </div>
     <div class="process-setting-container">工序设置</div>
   </div>
 </template>
 <script setup>
 import { ref, reactive, onMounted } from "vue";
-import jsPlumb from "jsplumb";
+import { jsPlumb } from "jsplumb";
 
 const nodeTypeList = ref([
   { id: 1, type: "工序1" },
@@ -39,7 +42,32 @@ const nodeTypeList = ref([
   { id: 5, type: "工序5" },
 ]);
 
-onMounted(() => {});
+const common = {
+  endpoint: "Rectangle",
+  connector: ["Straight"],
+  anchor: ["Left", "Right"],
+};
+onMounted(() => {
+  jsPlumb.connect(
+    {
+      source: "item_left",
+      target: "item_right",
+      paintStyle: { stroke: "lightgray", strokeWidth: 3 },
+      endpointStyle: {
+        fill: "lightgray",
+        outlineStroke: "darkgray",
+        outlineWidth: 2,
+      },
+      overlays: [["Arrow", { width: 12, length: 12, location: 0.5 }]],
+    },
+    common
+  );
+
+  jsPlumb.setContainer("flow-area");
+
+  jsPlumb.draggable("item_left", { containment: "flow-area" });
+  jsPlumb.draggable("item_right", { containment: "flow-area" });
+});
 </script>
 
 <style lang="scss" scoped>
@@ -68,9 +96,20 @@ onMounted(() => {});
   .flow-continer {
     flex: 1;
     background-color: #f2f2f2;
+
+    position: relative;
+    padding: 20px;
   }
   .process-setting-container {
     width: 25%;
   }
+}
+
+.drag-item {
+  height: 80px;
+  width: 80px;
+  border: 1px solid blue;
+  float: left;
+  position: absolute;
 }
 </style>

@@ -38,8 +38,8 @@ export default defineConfig({
         }),
       ],
     }),
-    ElementPlus({
-      useSource: true,
-    }),
+    // ElementPlus({
+    //   useSource: true,
+    // }),
   ],
 });
