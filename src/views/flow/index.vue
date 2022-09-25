@@ -537,6 +537,14 @@ const rightClick = () => {
     width: 25%;
   }
 }
+
+.drag-item {
+  height: 80px;
+  width: 80px;
+  border: 1px solid blue;
+  float: left;
+  position: absolute;
+}
 </style>
 
 <style lang="scss">
